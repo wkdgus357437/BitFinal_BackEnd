@@ -10,6 +10,7 @@ public class BitFinalApplication {
         SpringApplication.run(BitFinalApplication.class , args);
         System.out.println("!1");
         System.out.println("!1");
+        System.out.println("22");
     }
 
         }
