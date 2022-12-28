@@ -2,15 +2,17 @@ package com.main.bitfinal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+@EntityScan("com.main.bitfinal.memberService.memberEntity")
+@EnableJpaRepositories("com.main.bitfinal.memberService.repository")
 @SpringBootApplication
 public class BitFinalApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BitFinalApplication.class , args);
-        System.out.println("!1");
-        System.out.println("!1");
-        System.out.println("22");
+        SpringApplication.run(BitFinalApplication.class, args);
+
     }
 
-        }
+}
