@@ -32,6 +32,7 @@ public class MemberController {
 
     }
 
+    // 중복체크
     @GetMapping(path = "duplicationChk")
     public String duplicationChk(@RequestParam String username) {
         Optional<MemberDTO> memberDTO = memberRepository.findByUsername(username);
