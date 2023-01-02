@@ -34,21 +34,21 @@ public class AdminBoardController {
 	public List<AdminBoardDTO> adminBoardList(){
 		return adminBoardService.adminBoardList();
 	}
-//	
-//	@GetMapping(path = "getAdminBoard") //관리자 글 쓰기 유효성 필요한건지?
-//	public Optional<AdminBoardDTO> getAdminBoard(@RequestParam int adminboard_seq){
-//		return adminBoardService.getAdminBoard(adminboard_seq);
-//	}
-//	
 	
 	@PutMapping(path = "adminBoardUpdate") //관리자 글 수정
 	public void adminBoardUpdate(@ModelAttribute AdminBoardDTO adminBoardDTO) {
 		adminBoardService.adminBoardUpdate(adminBoardDTO);
 	}
 	
-	@DeleteMapping(path = "adminBoardDelete")
-	public void adminBoardDelete(@RequestParam int dminBoardSeq) {
-		adminBoardService.adminBoardDelete(dminBoardSeq);
+	@DeleteMapping(path = "adminBoardDelete") //관리자 글 삭제
+	public void adminBoardDelete(@RequestParam int adminBoardSeq) {
+		adminBoardService.adminBoardDelete(adminBoardSeq);
 	}
+	
+	@GetMapping(path = "getAdminBoard")//관리자 게시판 글 수정 전 찾기
+	public Optional<AdminBoardDTO> getAdminBoard(@RequestParam int adminBoardSeq){
+		return adminBoardService.getAdminBoard(adminBoardSeq);
+	}
+
 }
 
