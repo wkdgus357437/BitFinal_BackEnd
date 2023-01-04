@@ -26,7 +26,11 @@ public class BitFinalApplication {
         return new WebMvcConfigurer(){
             @Override
             public  void addCorsMappings(CorsRegistry registry){
-                registry.addMapping("/**").allowedOrigins("http://localhost:3000");
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("*")
+                        .allowedHeaders("X-AUTH-TOKEN","Authorization","Access-Control-Allow-Origin","Access-Control-Allow-Credentials","X-Naver-Client-Id","X-Naver-Client-Secret")
+                        .exposedHeaders("Content-Disposi");
             }
         };
     }
