@@ -39,6 +39,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
@@ -89,6 +90,15 @@
             <artifactId>osdt_cert</artifactId>
             <version>21.5.0.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>kobis.opcl.rest</groupId>
+            <artifactId>kobis-opcl-rest</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/src/main/resources/libs/kobis-opcl-rest-v1.0.jar</systemPath>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -97,6 +107,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <includeSystemScope>true</includeSystemScope>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
