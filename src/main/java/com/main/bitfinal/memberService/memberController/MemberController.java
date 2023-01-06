@@ -50,7 +50,9 @@ public class MemberController {
     }
 
     @GetMapping(path = "test")
-    public List<User> getAlluser(){
+    public List<User> getAllMember(){
         return userRepository.findAll();
     }
+
+
 }
