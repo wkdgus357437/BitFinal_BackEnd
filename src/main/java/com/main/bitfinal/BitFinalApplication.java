@@ -10,9 +10,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@EntityScan(basePackages = {"com.main.bitfinal.memberService.memberEntity","com.adminBoard.bean","user.bean"})
-@EnableJpaRepositories(basePackages = { "com.main.bitfinal.memberService.repository","com.adminBoard.dao","user.dao"})
-@ComponentScan(basePackages = {"com.main.bitfinal","com.adminBoard.*","user.*"})
+@EntityScan(basePackages = {"com.main.bitfinal.memberService.memberEntity","com.adminBoard.bean","user.bean","store.bean"})
+@EnableJpaRepositories(basePackages = { "com.main.bitfinal.memberService.repository","com.adminBoard.dao","user.dao","store.dao"})
+@ComponentScan(basePackages = {"com.main.bitfinal","com.adminBoard.*","user.*","store.*"})
 @SpringBootApplication
 public class BitFinalApplication {
 
