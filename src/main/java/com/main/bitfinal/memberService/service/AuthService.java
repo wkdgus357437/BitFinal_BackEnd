@@ -4,6 +4,7 @@ import com.main.bitfinal.memberService.dto.TokenDTO;
 import com.main.bitfinal.memberService.dto.UserRequestDTO;
 import com.main.bitfinal.memberService.dto.UserResponseDTO;
 import com.main.bitfinal.memberService.jwt.TokenProvider;
+import com.main.bitfinal.memberService.memberEntity.TokenRequestDTO;
 import com.main.bitfinal.memberService.memberEntity.User;
 import com.main.bitfinal.memberService.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -55,5 +56,20 @@ public class AuthService {
         Authentication authentication = managerBuilder.getObject().authenticate(authenticationToken);
         return tokenProvider.generateTokenDto(authentication);
 
+    }
+
+    public TokenDTO reIssue(TokenRequestDTO tokenRequestDTO) {
+
+        // 서버에서 넘어온 리프레시 토큰 비교
+        if (!tokenProvider.validateToken(tokenRequestDTO.getRefreshToken())) {
+            throw new RuntimeException("refreshToken 이 유효하지 않습니다.");
+        }
+
+        // 일치하면 새로운 토큰 발급 후 쿠키와 리덕스에 새로운 토큰 저장
+        Authentication authentication = tokenProvider.getAuthentication(tokenRequestDTO.getAccessToken());
+
+        System.out.println("토큰재발급");
+
+        return tokenProvider.generateTokenDto(authentication);
     }
 }
