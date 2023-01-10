@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.main.bitfinal.memberService.memberEntity.User;
+
 import store.bean.StoreDTO;
 import store.bean.UserDTO;
 
@@ -40,5 +42,8 @@ public interface StoreDAO extends JpaRepository<StoreDTO, Long>{
 
 	@Query("SELECT storeDTO FROM StoreDTO storeDTO where storeDTO.category='snack' ORDER BY storeDTO.store_seq DESC")
 	public List<StoreDTO> getIndexSnack();
+	
+	@Query("select user from User user where user.username=:username")
+	public User getUser(@Param("username") String username);
 	
 }

@@ -3,7 +3,10 @@ package store.dao;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -25,4 +28,8 @@ public interface CartDAO extends JpaRepository<CartDTO, String> {
 	@Query("select cartDTO from CartDTO cartDTO where cartDTO.userName=:userName and cartDTO.store_seq=:store_seq and cartDTO.state='pay'")
 	public CartDTO findByOne(@Param("userName") String userName, @Param("store_seq") int store_seq);
 	
+	@Transactional
+	@Modifying
+	@Query("delete from CartDTO cartDTO where cartDTO.cart_seq=:cart_seq")
+	public void deleteBySeq(@Param("cart_seq") int cart_seq);
 }

@@ -4,24 +4,37 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.main.bitfinal.memberService.dto.UserRequestDTO;
+import com.main.bitfinal.memberService.memberEntity.User;
+
 import javax.servlet.http.HttpSession;
 import store.bean.CartDTO;
 import store.bean.PayDTO;
+import store.bean.Request;
+import store.bean.SmsResponse;
 import store.bean.StoreDTO;
 import store.bean.UserDTO;
+import store.service.SmsService;
 import store.service.StoreService;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
 @CrossOrigin
 @RestController //@RestController = @Controller + @ResponseBody
@@ -29,6 +42,8 @@ import java.io.IOException;
 public class StoreController {
 	@Autowired
 	private StoreService storeService;
+	@Autowired
+	private SmsService smsService;
 	
 	@GetMapping(path = "getStoreList")
 	public List<StoreDTO> getStoreList() {
@@ -81,6 +96,11 @@ public class StoreController {
 		return storeService.login(userDTO);
 	}
 	
+	@PostMapping(path = "getUser")
+	public User getUser(@RequestParam String username) {
+		return storeService.getUser(username);
+	}
+	
 	//carttable 이용
 	@PostMapping(path = "insertCart")
 	public void insertCart(@ModelAttribute CartDTO cartDTO) {
@@ -103,12 +123,13 @@ public class StoreController {
 	}
 	
 	@GetMapping(path = "deleteCart")
-	public void deleteCart(@RequestParam String cart_seq) {
+	public void deleteCart(@RequestParam int cart_seq) {
 		storeService.deleteCart(cart_seq);
 	}
 	
 	@PostMapping(path = "updateCart")
 	public void updateCart(@ModelAttribute CartDTO cartDTO) {
+		System.out.println(cartDTO.getCart_seq());
 		storeService.updateCart(cartDTO);
 	}
 	
@@ -148,5 +169,12 @@ public class StoreController {
 		System.out.println(orderNumber);
 		return storeService.getPay(orderNumber);
 	}
+	
+	@PostMapping(path = "sms")
+    public ResponseEntity<SmsResponse> test(@ModelAttribute Request request) throws NoSuchAlgorithmException, URISyntaxException, UnsupportedEncodingException, InvalidKeyException, JsonProcessingException {
+        System.out.println("controller : "+request.getRecipientPhoneNumber());
+		SmsResponse data = smsService.sendSms(request.getRecipientPhoneNumber(), request.getContent());
+        return ResponseEntity.ok().body(data);
+    }
 	
 }

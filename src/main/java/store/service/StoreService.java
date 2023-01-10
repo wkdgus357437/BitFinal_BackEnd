@@ -3,6 +3,8 @@ package store.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.main.bitfinal.memberService.memberEntity.User;
+
 import store.bean.CartDTO;
 import store.bean.PayDTO;
 import store.bean.StoreDTO;
@@ -21,6 +23,8 @@ public interface StoreService {
 	public List<StoreDTO> getPopcornList(String category);
 
 	public UserDTO login(UserDTO userDTO);
+	
+	public User getUser(String username);
 
 	public void insertCart(CartDTO cartDTO);
 
@@ -30,7 +34,7 @@ public interface StoreService {
 
 	public List<Integer> getCartListCount(String userName);
 
-	public void deleteCart(String cart_seq);
+	public void deleteCart(int cart_seq);
 
 	public void updateCart(CartDTO cartDTO);
 	
