@@ -41,6 +41,11 @@ public class UserService {
         return UserResponseDTO.of(userRepository.save(user));
     }
 
+
+    @Transactional
+    public void deleteByUsername(String username){
+        userRepository.deleteByUsername(username);
+    }
 }
 
 // @Transactional => Transactional = 거래

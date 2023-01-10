@@ -38,6 +38,12 @@ public class UserController {
         return ResponseEntity.ok(userService.changeMemberPassword(request.getExPwd(), request.getNewPwd()));
     }
 
+    @GetMapping(path = "delete")
+    public void deleteUser(@RequestParam String username) {
+        System.out.println(username);
+        userService.deleteByUsername(username);
+    }
+
     // 아이디 중복체크
     @GetMapping(path = "duplicationChk")
     public String duplicationChk(@RequestParam String username) {
