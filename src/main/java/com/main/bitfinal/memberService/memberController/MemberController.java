@@ -7,6 +7,7 @@ import com.main.bitfinal.memberService.repository.UserRepository;
 import com.main.bitfinal.memberService.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,6 +50,7 @@ public class MemberController {
         }
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping(path = "test")
     public List<User> getAlluser(){
         return userRepository.findAll();
