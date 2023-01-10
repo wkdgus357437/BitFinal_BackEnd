@@ -1,6 +1,7 @@
 package com.adminBoard.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.adminBoard.bean.AdminBoardDTO;
 import com.adminBoard.service.AdminBoardService;
+
 
 @CrossOrigin
 @RestController 
@@ -41,7 +43,7 @@ public class AdminBoardController {
 	}
 	
 	@DeleteMapping(path = "adminBoardDelete") //관리자 글 삭제
-	public void adminBoardDelete(@RequestParam int adminBoardSeq) {
+	public void adminBoardDelete(@RequestParam String adminBoardSeq) {
 		adminBoardService.adminBoardDelete(adminBoardSeq);
 	}
 	
@@ -49,6 +51,9 @@ public class AdminBoardController {
 	public Optional<AdminBoardDTO> getAdminBoard(@RequestParam int adminBoardSeq){
 		return adminBoardService.getAdminBoard(adminBoardSeq);
 	}
-
+	
+	@GetMapping(path = "adminBoardSearch")
+	public List<AdminBoardDTO> adminBoardSearch(@RequestParam Map<String, String> map){
+		return adminBoardService.adminBoardSearch(map);
+	}
 }
-

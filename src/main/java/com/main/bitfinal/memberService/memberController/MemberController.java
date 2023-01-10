@@ -1,9 +1,13 @@
 package com.main.bitfinal.memberService.memberController;
 
 import com.main.bitfinal.memberService.memberEntity.MemberDTO;
+import com.main.bitfinal.memberService.memberEntity.User;
 import com.main.bitfinal.memberService.repository.MemberRepository;
+import com.main.bitfinal.memberService.repository.UserRepository;
+import com.main.bitfinal.memberService.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +17,14 @@ import java.util.Optional;
 @Slf4j
 @CrossOrigin("http://localhost:3000")
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/member123")
 public class MemberController {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder; // config 에서 @Bean 처리로 dependency Injection
@@ -44,7 +51,9 @@ public class MemberController {
     }
 
     @GetMapping(path = "test")
-    public List<MemberDTO> getAlluser(){
-        return memberRepository.findAll();
+    public List<User> getAllMember(){
+        return userRepository.findAll();
     }
+
+
 }
