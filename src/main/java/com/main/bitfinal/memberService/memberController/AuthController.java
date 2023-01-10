@@ -27,7 +27,7 @@ public class AuthController {
     // 회원가입 매핑
     @PostMapping(path = "signup")
     public void signUp(@ModelAttribute User user) {
-        user.setRoleType(RoleType.ROLE_ADMIN);
+        user.setRoleType(RoleType.ROLE_USER);
         String rawPassword = user.getPassword();
         String encPassword = passwordEncoder.encode(rawPassword);
         user.setPassword(encPassword);

@@ -41,12 +41,24 @@ public class UserController {
         return ResponseEntity.ok(userService.changeMemberPassword(request.getExPwd(), request.getNewPwd()));
     }
 
-
+    // 아이디 중복체크
     @GetMapping(path = "duplicationChk")
     public String duplicationChk(@RequestParam String username) {
         Optional<User> user = userRepository.findByUsername(username);
         if (user.isPresent()) {
             return "duplicate";
+        } else {
+            return null;
+        }
+    }
+
+
+    // 이미 가입한 회원 체크 (회원가입 시 본인인증 후 이름 중복검사)
+    @GetMapping(path = "existName")
+    public String existName(@RequestParam String name) {
+        Optional<User> user = userRepository.findByName(name);
+        if (user.isPresent()) {
+            return "exist";
         } else {
             return null;
         }
