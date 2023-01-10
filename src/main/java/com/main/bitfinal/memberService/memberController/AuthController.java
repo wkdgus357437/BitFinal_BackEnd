@@ -45,5 +45,7 @@ public class AuthController {
     public ResponseEntity<TokenDTO> reIssue(@RequestBody TokenRequestDTO tokenRequestDTO) {
         return ResponseEntity.ok(authService.reIssue(tokenRequestDTO));
     }
+
+
 }
 

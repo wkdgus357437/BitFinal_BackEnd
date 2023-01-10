@@ -50,9 +50,4 @@ public class MemberController {
         }
     }
 
-    @Secured("ROLE_ADMIN")
-    @GetMapping(path = "test")
-    public List<User> getAlluser(){
-        return userRepository.findAll();
-    }
 }

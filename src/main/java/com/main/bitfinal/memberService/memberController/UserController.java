@@ -9,8 +9,12 @@ import com.main.bitfinal.memberService.repository.UserRepository;
 import com.main.bitfinal.memberService.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin("http://localhost:3000")
@@ -23,13 +27,6 @@ public class UserController {
 
     private final UserRepository userRepository;
 
-    @GetMapping("/me")
-    public ResponseEntity<UserResponseDTO> getMyMemberInfo() {
-        UserResponseDTO myInfoBySecurity = userService.getMyInfoBySecurity();
-        System.out.println(myInfoBySecurity.getName());
-        return ResponseEntity.ok((myInfoBySecurity));
-        // return ResponseEntity.ok(memberService.getMyInfoBySecurity());
-    }
 
     @PostMapping("/nickname")
     public ResponseEntity<UserResponseDTO> setMemberNickname(@RequestBody UserRequestDTO request) {
@@ -52,7 +49,6 @@ public class UserController {
         }
     }
 
-
     // 이미 가입한 회원 체크 (회원가입 시 본인인증 후 이름 중복검사)
     @GetMapping(path = "existName")
     public String existName(@RequestParam String name) {
@@ -63,6 +59,15 @@ public class UserController {
             return null;
         }
     }
+
+    @Secured("ROLE_USER") // 로그인 정보없으면 401 에러 후 로그인페이지로 유턴 시킴
+    @GetMapping("/me") // axios 요청 시 헤더에 토큰 담기
+    public ResponseEntity<UserResponseDTO> getMyMemberInfo() {
+        UserResponseDTO myInfoBySecurity = userService.getMyInfoBySecurity();
+        System.out.println(myInfoBySecurity.getName());
+        return ResponseEntity.ok((myInfoBySecurity));
+    }
+
 
 }
 
