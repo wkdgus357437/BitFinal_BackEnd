@@ -74,7 +74,6 @@ public class UserController {
         return ResponseEntity.ok((myInfoBySecurity));
     }
 
-
 }
 
 // ResponseEntity 구조 http://stanley-dev-log.tistory.com/7
