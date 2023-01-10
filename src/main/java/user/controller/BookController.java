@@ -18,9 +18,7 @@ public class BookController {
     //@ResponseBody //이거그거 jsp로 안읽고 한글로 읽던게 바꾸는 그건데 아무튼 여기서는 그 에이작스로 돌아가게만드는용도임 안쓰면 디스페처로 가서 지랄지랄
     @PostMapping("write")
     public void write(@RequestBody BookDTO bookDTO) {
-
-        bookDAO.save(bookDTO);
-
+            bookDAO.save(bookDTO);
     }
 
     @PostMapping("movieList")
