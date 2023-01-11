@@ -39,7 +39,7 @@ public class AuthService {
 
     // 로그인 메소드
     //
-    // MemberRequestDto 에 있는 메소드 toAuthentication 를 통해 생긴
+    // userRequestDto 에 있는 메소드 toAuthentication 를 통해 생긴
     // UsernamePasswordAuthenticationToken 타입의 데이터를 가지게된다.
     // 주입받은 Builder 를 통해 AuthenticationManager 를 구현한 ProviderManager 를 생성한다.
     // 이후 ProviderManager 는 데이터를 AbstractUserDetailsAuthenticationProvider 의 자식 클래스인

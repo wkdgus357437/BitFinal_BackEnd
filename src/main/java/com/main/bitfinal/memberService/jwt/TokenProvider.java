@@ -27,7 +27,7 @@ public class TokenProvider {
     // AUTHORITIES_KEY, BEARER_TYPE => 토큰을 생성하고 검증할 때
     private static final String AUTHORITIES_KEY = "auth";
     private static final String BEARER_TYPE = "bearer";
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 5; // 토큰의 만료 시간 30분
+    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 10; // 토큰의 만료 시간 10분
     private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7;
     private final Key key; //JWT 를 만들 때 사용하는 암호화 키값을 사용하기 위해 security 에서 불러왔다.
 
@@ -51,9 +51,10 @@ public class TokenProvider {
 
         Date tokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME); // 토큰 만료시간
 
-        System.out.println(tokenExpiresIn);
+        System.out.println(tokenExpiresIn + "에 만료됨");
 
         String accessToken = Jwts.builder()
+                .setExpiration(tokenExpiresIn)
                 .setSubject(authentication.getName())
                 .claim(AUTHORITIES_KEY, authorites)
                 .signWith(key, SignatureAlgorithm.HS512)
