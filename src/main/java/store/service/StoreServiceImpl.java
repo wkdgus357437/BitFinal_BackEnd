@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.main.bitfinal.memberService.memberEntity.User;
+
 import store.bean.CartDTO;
 import store.bean.PayDTO;
 import store.bean.StoreDTO;
@@ -65,6 +67,11 @@ public class StoreServiceImpl implements StoreService {
 	public UserDTO login(UserDTO userDTO) {
 		return storeDAO.login(userDTO.getUserName(), userDTO.getPassword());
 	}
+	
+	@Override
+	public User getUser(String username) {
+		return storeDAO.getUser(username);
+	}
 
 	@Override
 	public void insertCart(CartDTO cartDTO) {
@@ -96,8 +103,8 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void deleteCart(String cart_seq) {
-		cartDAO.deleteById(cart_seq);
+	public void deleteCart(int cart_seq) {
+		cartDAO.deleteBySeq(cart_seq);
 	}
 
 	@Override
