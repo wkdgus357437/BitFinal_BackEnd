@@ -6,6 +6,7 @@ import user.bean.BookDTO;
 import user.dao.BookDAO;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin("http://localhost:3000")
 @RestController
@@ -44,4 +45,18 @@ public class BookController {
 
         return bookDAO.timeList(movie_title,movie_date,movie_city,movie_cinema);
     }
+    
+/*------------------------박지훈---------------------------*/
+    
+    @GetMapping(value = "getSeat")
+	public BookDTO getSeat(@RequestParam int pk) {
+		return bookDAO.findById(pk).orElse(null);
+	}
+    
+    @PostMapping(value = "addSeat")
+	public void addSeat(@RequestBody  Map<String, Object> map) {
+		int pk = (int) map.get("pk");
+		String movie_seat= (String) map.get("movie_seat");
+		bookDAO.UpdateSeat(pk,movie_seat);
+	}
 }
