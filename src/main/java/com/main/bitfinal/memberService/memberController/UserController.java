@@ -3,7 +3,6 @@ package com.main.bitfinal.memberService.memberController;
 import com.main.bitfinal.memberService.dto.ChangePasswordRequestDTO;
 import com.main.bitfinal.memberService.dto.UserRequestDTO;
 import com.main.bitfinal.memberService.dto.UserResponseDTO;
-import com.main.bitfinal.memberService.memberEntity.MemberDTO;
 import com.main.bitfinal.memberService.memberEntity.User;
 import com.main.bitfinal.memberService.repository.UserRepository;
 import com.main.bitfinal.memberService.service.UserService;
@@ -14,9 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin("http://localhost:3000")
@@ -113,6 +111,14 @@ public class UserController {
         user.setPassword(encPassword);
         String password = user.getPassword();
         userRepository.changePassword(username, password);
+    }
+
+    // 관리자 페이지 유저리스트
+    @Secured("ROLE_ADMIN") // 관리자만 볼 수 있다, 권한없으면 로그아웃 시킴
+    @GetMapping(path = "getUserList")
+    public ResponseEntity<List<User>> getAllMember(){
+        List<User> list = userRepository.findAll();
+        return ResponseEntity.ok(list);
     }
 }
 
