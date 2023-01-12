@@ -10,6 +10,8 @@ import com.main.bitfinal.memberService.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -26,6 +28,8 @@ public class UserController {
     private final UserService userService;
 
     private final UserRepository userRepository;
+
+    private final BCryptPasswordEncoder passwordEncoder;
 
 
     @PostMapping("/nickname")
@@ -74,6 +78,42 @@ public class UserController {
         return ResponseEntity.ok((myInfoBySecurity));
     }
 
+    // 아이디 찾기
+    @GetMapping("findUsername")
+    public String findUsername(@ModelAttribute User user) {
+        String name = user.getName();
+        String birth = user.getBirth();
+        String phoneNumber = user.getPhoneNumber();
+        return userRepository.findByMyId(name, birth, phoneNumber);
+    }
+
+    // 비번찾기 입력정보 확인 후 true or false
+    @GetMapping("findPassword")
+    public String findPassword(@ModelAttribute User user) {
+        String username = user.getUsername();
+        String name = user.getName();
+        String birth = user.getBirth();
+        String phoneNumber = user.getPhoneNumber();
+
+        Optional<User> userChk = userRepository.findByPasswordUserInfo(username, name, birth, phoneNumber);
+        if (userChk.isPresent()) {
+            return "true";
+        } else
+            return null;
+    }
+
+    // 비밀번호 찾기 후 새로운 비밀번호 저장
+    @Transactional
+    @PostMapping("findAndChangePassword")
+    public void findAndChangePassword(@ModelAttribute User user) {
+        String username = user.getUsername();
+        String rawPassword = user.getPassword();
+        System.out.println(username + rawPassword);
+        String encPassword = passwordEncoder.encode(rawPassword);
+        user.setPassword(encPassword);
+        String password = user.getPassword();
+        userRepository.changePassword(username, password);
+    }
 }
 
 // ResponseEntity 구조 http://stanley-dev-log.tistory.com/7
