@@ -20,25 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AuthService {
     private final AuthenticationManagerBuilder managerBuilder;
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
 
-    public UserResponseDTO signUp(UserRequestDTO requestDTO) {
-
-        // 회원가입 중복검사
-        if (userRepository.existsByUsername(requestDTO.getUsername())) {
-            throw new RuntimeException("이미 가입되어 있는 유저입니다!!");
-        }
-
-        // 중복검사 후 save
-        User user = requestDTO.toUser(passwordEncoder);
-        return UserResponseDTO.of(userRepository.save(user));
-    }
-
-
     // 로그인 메소드
-    //
     // userRequestDto 에 있는 메소드 toAuthentication 를 통해 생긴
     // UsernamePasswordAuthenticationToken 타입의 데이터를 가지게된다.
     // 주입받은 Builder 를 통해 AuthenticationManager 를 구현한 ProviderManager 를 생성한다.
@@ -68,7 +52,7 @@ public class AuthService {
         // 일치하면 새로운 토큰 발급 후 쿠키와 리덕스에 새로운 토큰 저장
         Authentication authentication = tokenProvider.getAuthentication(tokenRequestDTO.getAccessToken());
 
-        System.out.println("토큰재발급");
+        System.out.println("페이지새로고침-토큰재발급");
 
         return tokenProvider.generateTokenDto(authentication);
     }
