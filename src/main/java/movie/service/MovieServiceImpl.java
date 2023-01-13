@@ -19,11 +19,11 @@ public class MovieServiceImpl implements MovieService {
 	
 	@Override
 	public void write(MovieDTO movieDTO) {
-		System.out.println("write 성공");
 		//DB
-		//id컬럼이 primary key로 설정되어있기 때문에 		
+		//id컬럼이 primary key로 설정되어있기 때문에
 		//똑같은 아이디가 없으면 insert로 수행이 되고, id가 있으면 update로 수행된다.
 		movieDAO.save(movieDTO);
+		System.out.println("write 성공");
 	}
 
 	@Override
