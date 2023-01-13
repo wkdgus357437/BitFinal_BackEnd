@@ -27,7 +27,7 @@ public class TokenProvider {
     // AUTHORITIES_KEY, BEARER_TYPE => 토큰을 생성하고 검증할 때
     private static final String AUTHORITIES_KEY = "auth";
     private static final String BEARER_TYPE = "bearer";
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 10; // 토큰의 만료 시간 10분
+    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 15; // 토큰의 만료 시간 15분
     private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7;
     private final Key key; //JWT 를 만들 때 사용하는 암호화 키값을 사용하기 위해 security 에서 불러왔다.
 

@@ -27,7 +27,7 @@ public class User {
             generator = "MEMBER_SEQ_GENERATOR")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username; // id
     @Column(nullable = false)
     private String password; // 마이페이지에서 변경가능하게 setter 잡기

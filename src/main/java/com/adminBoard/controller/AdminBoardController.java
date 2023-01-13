@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +34,11 @@ public class AdminBoardController {
 		adminBoardService.adminBoardWrite(adminBoardDTO);
 	}
 
+	@Secured("ROLE_ADMIN") // 관리자만 볼 수 있음, 관리자권한없으면 로그아웃시킴
 	@GetMapping(path = "adminBoardList") //관리자 글 리스트
-	public List<AdminBoardDTO> adminBoardList(){
-		return adminBoardService.adminBoardList();
+	public ResponseEntity<List<AdminBoardDTO>> adminBoardList(){
+		List<AdminBoardDTO> list = adminBoardService.adminBoardList();
+		return ResponseEntity.ok(list);
 	}
 	
 	@PutMapping(path = "adminBoardUpdate") //관리자 글 수정
