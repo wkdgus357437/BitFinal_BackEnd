@@ -59,8 +59,8 @@ public class UserController {
 
     // 이미 가입한 회원 체크 (회원가입 시 본인인증 후 이름 중복검사)
     @GetMapping(path = "existName")
-    public String existName(@RequestParam String name) {
-        Optional<User> user = userRepository.findByName(name);
+    public String existName(@RequestParam String phoneNumber) {
+        Optional<User> user = userRepository.findByPhoneNumber(phoneNumber);
         if (user.isPresent()) {
             return "exist";
         } else {

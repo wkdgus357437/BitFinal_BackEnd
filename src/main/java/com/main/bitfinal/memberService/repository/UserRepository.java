@@ -15,7 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByUsername(String username); // duplication chk
 
-    Optional<User> findByName(String name);
+    Optional<User> findByPhoneNumber(String phoneNumber);
 
     void deleteByUsername(String username);
 
