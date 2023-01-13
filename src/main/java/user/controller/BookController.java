@@ -45,6 +45,7 @@ public class BookController {
 
         return bookDAO.timeList(movie_title,movie_date,movie_city,movie_cinema);
     }
+
     
 /*------------------------박지훈---------------------------*/
     
