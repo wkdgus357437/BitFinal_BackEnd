@@ -87,7 +87,6 @@ public class MovieController {
 	//세번째
 	@PostMapping(path = "write")
 	public void write(@ModelAttribute MovieDTO movieDTO) {
-		System.out.println("movieDTO 실행중" + movieDTO);
 		MovieService.write(movieDTO);
 	}
 
