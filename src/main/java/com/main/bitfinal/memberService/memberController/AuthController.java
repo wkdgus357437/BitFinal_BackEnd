@@ -2,8 +2,6 @@ package com.main.bitfinal.memberService.memberController;
 
 import com.main.bitfinal.memberService.dto.TokenDTO;
 import com.main.bitfinal.memberService.dto.UserRequestDTO;
-import com.main.bitfinal.memberService.dto.UserResponseDTO;
-import com.main.bitfinal.memberService.memberEntity.MemberDTO;
 import com.main.bitfinal.memberService.memberEntity.RoleType;
 import com.main.bitfinal.memberService.memberEntity.TokenRequestDTO;
 import com.main.bitfinal.memberService.memberEntity.User;
@@ -14,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
