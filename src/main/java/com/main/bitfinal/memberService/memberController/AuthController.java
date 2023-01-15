@@ -45,6 +45,5 @@ public class AuthController {
         return ResponseEntity.ok(authService.reIssue(tokenRequestDTO));
     }
 
-
 }
 

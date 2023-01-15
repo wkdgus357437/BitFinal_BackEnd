@@ -184,7 +184,6 @@ public class StoreController {
 	// 마이페이지 구매현황 가져오기
 	@GetMapping(path = "myStorePaymentInfo")
 	public List<PayDTO> myStorePaymentInfo(@RequestParam String username) {
-		System.out.println(payDAO.findByMyPayment(username));
 		return payDAO.findByMyPayment(username);
 	}
 }
