@@ -129,9 +129,30 @@ public class UserController {
     // 관리자 페이지 유저리스트
     @Secured("ROLE_ADMIN") // 관리자만 볼 수 있다, 권한없으면 로그아웃 시킴
     @GetMapping(path = "getUserList")
-    public ResponseEntity<List<User>> getAllMember(){
+    public ResponseEntity<List<User>> getAllMember() {
         List<User> list = userRepository.findAll();
         return ResponseEntity.ok(list);
+    }
+
+    // 개인정보 수정 페이지(기존 비밀번호 일치 확인)
+    @PostMapping(path = "exPwdChk")
+    public String exPwdChk(@ModelAttribute User user) {
+        String username = user.getUsername(); // 리액트에서 넘어온 것
+        String password = user.getPassword(); // 리액트에서 넘어온 것
+
+        System.out.println(username + " " + password);
+
+        String exPwds = userRepository.findByPassword(username); // DB 조회
+        System.out.println(exPwds);
+
+        if (passwordEncoder.matches(password, exPwds)) {
+            return "correct";
+        } else {
+            return "false";
+        }
+
+
+
     }
 }
 

@@ -27,6 +27,7 @@ import store.bean.Request;
 import store.bean.SmsResponse;
 import store.bean.StoreDTO;
 import store.bean.UserDTO;
+import store.dao.PayDAO;
 import store.service.SmsService;
 import store.service.StoreService;
 import java.io.File;
@@ -44,43 +45,46 @@ public class StoreController {
 	private StoreService storeService;
 	@Autowired
 	private SmsService smsService;
-	
+
+	@Autowired
+	private PayDAO payDAO;
+
 	@GetMapping(path = "getStoreList")
 	public List<StoreDTO> getStoreList() {
 		return storeService.getStoreList();
 	}
-	
+
 	@GetMapping(path = "getPopcornList")
 	public List<StoreDTO> getPopcornList(@RequestParam String category) {
 		return storeService.getPopcornList(category);
 	}
-	
+
 	@PostMapping(path = "write")
 	public void write(@ModelAttribute StoreDTO storeDTO) {
 		storeService.write(storeDTO);
 	}
-	
+
 	@GetMapping(path = "isExistSubject")
 	public String isExistSubject(@RequestParam String subject) {
 		return storeService.isExistSubject(subject);
 	}
-	
+
 	@GetMapping(path = "getStore")
 	public Optional<StoreDTO> getStore(@RequestParam int store_seq) {
 		return storeService.getStore(store_seq);
 	}
-	
+
 	// name="img" 1개 이상일 경우
 	@PostMapping(value = "/imgUpload")
 	@ResponseBody
 	public void upload(@RequestParam MultipartFile img, HttpSession session) {
 		//실제폴더
 		String filePath = session.getServletContext().getRealPath("/public/storage");
-		System.out.println("실제폴더 : "+filePath);
+		System.out.println("실제폴더 : " + filePath);
 		String fileName = img.getOriginalFilename();
-		
+
 		File file = new File(filePath, fileName);
-		
+
 		try {
 			//FileCopyUtils.copy(upload.getInputStream(), new FileOutputStream(file)); // 가상폴더로 복사한다
 			img.transferTo(file);
@@ -89,92 +93,98 @@ public class StoreController {
 			e.printStackTrace();
 		}//복사
 	}
-	
+
 	//usertable 이용
 	@PostMapping(path = "login")
 	public UserDTO login(@ModelAttribute UserDTO userDTO) {
 		return storeService.login(userDTO);
 	}
-	
+
 	@PostMapping(path = "getUser")
 	public User getUser(@RequestParam String username) {
 		return storeService.getUser(username);
 	}
-	
+
 	//carttable 이용
 	@PostMapping(path = "insertCart")
 	public void insertCart(@ModelAttribute CartDTO cartDTO) {
 		storeService.insertCart(cartDTO);
 	}
-	
+
 	@GetMapping(path = "isExistCart")
 	public String isExistCart(@RequestParam String userName, int store_seq) {
 		return storeService.isExistCart(userName, store_seq);
 	}
-	
+
 	@GetMapping(path = "getCartList")
 	public List<CartDTO> getCartList(@RequestParam String userName) {
 		return storeService.getCartList(userName);
 	}
-	
+
 	@GetMapping(path = "getCartListCount")
 	public List<Integer> getCartListCount(@RequestParam String userName) {
 		return storeService.getCartListCount(userName);
 	}
-	
+
 	@GetMapping(path = "deleteCart")
 	public void deleteCart(@RequestParam int cart_seq) {
 		storeService.deleteCart(cart_seq);
 	}
-	
+
 	@PostMapping(path = "updateCart")
 	public void updateCart(@ModelAttribute CartDTO cartDTO) {
 		System.out.println(cartDTO.getCart_seq());
 		storeService.updateCart(cartDTO);
 	}
-	
+
 	@GetMapping(path = "getOne")
 	public CartDTO getOne(@RequestParam String userName, int store_seq) {
 		return storeService.getOne(userName, store_seq);
 	}
-	
+
 	@GetMapping(path = "getIndexCombo")
 	public List<StoreDTO> getIndexCombo() {
 		return storeService.getIndexCombo();
 	}
-	
+
 	@GetMapping(path = "getIndexPopcorn")
 	public List<StoreDTO> getIndexPopcorn() {
 		return storeService.getIndexPopcorn();
 	}
-	
+
 	@GetMapping(path = "getIndexDrink")
 	public List<StoreDTO> getIndexDrink() {
 		return storeService.getIndexDrink();
 	}
-	
+
 	@GetMapping(path = "getIndexSnack")
 	public List<StoreDTO> getIndexSnack() {
 		return storeService.getIndexSnack();
 	}
-	
+
 	@PostMapping(path = "insertPay")
 	public void insertPay(@ModelAttribute PayDTO payDTO) {
-		
+
 		storeService.insertPay(payDTO);
 	}
-	
+
 	@GetMapping(path = "getPay")
 	public PayDTO getPay(@RequestParam String orderNumber) {
 		System.out.println(orderNumber);
 		return storeService.getPay(orderNumber);
 	}
-	
+
 	@PostMapping(path = "sms")
-    public ResponseEntity<SmsResponse> test(@ModelAttribute Request request) throws NoSuchAlgorithmException, URISyntaxException, UnsupportedEncodingException, InvalidKeyException, JsonProcessingException {
-        System.out.println("controller : "+request.getRecipientPhoneNumber());
+	public ResponseEntity<SmsResponse> test(@ModelAttribute Request request) throws NoSuchAlgorithmException, URISyntaxException, UnsupportedEncodingException, InvalidKeyException, JsonProcessingException {
+		System.out.println("controller : " + request.getRecipientPhoneNumber());
 		SmsResponse data = smsService.sendSms(request.getRecipientPhoneNumber(), request.getContent());
-        return ResponseEntity.ok().body(data);
-    }
-	
+		return ResponseEntity.ok().body(data);
+	}
+
+	// 마이페이지 구매현황 가져오기
+	@GetMapping(path = "myStorePaymentInfo")
+	public List<PayDTO> myStorePaymentInfo(@RequestParam String username) {
+		System.out.println(payDAO.findByMyPayment(username));
+		return payDAO.findByMyPayment(username);
+	}
 }
