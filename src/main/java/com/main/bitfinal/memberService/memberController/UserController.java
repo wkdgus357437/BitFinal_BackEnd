@@ -3,6 +3,7 @@ package com.main.bitfinal.memberService.memberController;
 import com.main.bitfinal.memberService.dto.ChangePasswordRequestDTO;
 import com.main.bitfinal.memberService.dto.UserRequestDTO;
 import com.main.bitfinal.memberService.dto.UserResponseDTO;
+import com.main.bitfinal.memberService.memberEntity.RoleType;
 import com.main.bitfinal.memberService.memberEntity.User;
 import com.main.bitfinal.memberService.repository.UserRepository;
 import com.main.bitfinal.memberService.service.UserService;
@@ -44,6 +45,22 @@ public class UserController {
     public void deleteUser(@RequestParam String username) {
         System.out.println(username);
         userService.deleteByUsername(username);
+    }
+
+    @GetMapping(path = "roleChange")
+    public String roleChange(@RequestParam String username,@RequestParam String roleType) {
+        User user = userRepository.findByUsername2(username);
+        if(user.getRoleType().equals(roleType)){
+            return "equal";
+        }else{
+            if(roleType.equals("ROLE_ADMIN")){
+                user.setRoleType(RoleType.ROLE_ADMIN);
+            }else{
+                user.setRoleType(RoleType.ROLE_USER);
+            }
+            userRepository.save(user);
+            return"changed";
+        }
     }
 
     // 아이디 중복체크

@@ -70,7 +70,7 @@ public class MovieDTO {
 	@Column(name = "movie_info_title2" ,length = 1000)
 	private String movie_info_title2;
 
-	@Column(name = "movie_info_type" ,length = 100)
+	@Column(name = "movie_info_type" ,length = 1000)
 	private String movie_info_type;
 
 	@Column(name = "movie_info_point",length = 1000)
