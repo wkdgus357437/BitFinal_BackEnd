@@ -18,7 +18,7 @@ import movie.dao.MovieDAO;
 @Service
 public class MovieServiceImpl implements MovieService {
 	@Autowired
-	private MovieDAO movieDAO;
+	private MovieDAO movieDAO; 
 	
 	@Autowired
 	private CommentDAO commentDAO;
