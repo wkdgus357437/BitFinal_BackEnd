@@ -9,8 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true) // 조회만 가능 =>  성능 최적화(등록, 수정, 삭제 동작 불가 하지만 영속성 컨텍스트의 변경감지를 위한 스냅샷을 보관하지 않아 성능이 향상된다.)

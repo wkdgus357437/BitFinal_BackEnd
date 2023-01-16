@@ -1,16 +1,15 @@
 package com.main.bitfinal.memberService.service;
 
-import com.main.bitfinal.memberService.memberEntity.RefreshTokenDTO;
 import com.main.bitfinal.memberService.dto.TokenDTO;
 import com.main.bitfinal.memberService.dto.UserRequestDTO;
 import com.main.bitfinal.memberService.jwt.TokenProvider;
+import com.main.bitfinal.memberService.memberEntity.RefreshTokenDTO;
 import com.main.bitfinal.memberService.memberEntity.RoleType;
 import com.main.bitfinal.memberService.memberEntity.TokenRequestDTO;
 import com.main.bitfinal.memberService.memberEntity.User;
 import com.main.bitfinal.memberService.repository.RefreshTokenRepository;
 import com.main.bitfinal.memberService.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;

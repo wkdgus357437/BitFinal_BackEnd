@@ -5,14 +5,11 @@ import com.main.bitfinal.memberService.dto.UserRequestDTO;
 import com.main.bitfinal.memberService.memberEntity.RoleType;
 import com.main.bitfinal.memberService.memberEntity.TokenRequestDTO;
 import com.main.bitfinal.memberService.memberEntity.User;
-import com.main.bitfinal.memberService.repository.UserRepository;
 import com.main.bitfinal.memberService.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @CrossOrigin
 @RestController

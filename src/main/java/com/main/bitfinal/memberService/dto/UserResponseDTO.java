@@ -1,17 +1,10 @@
 package com.main.bitfinal.memberService.dto;
 
-import com.main.bitfinal.memberService.memberEntity.RoleType;
 import com.main.bitfinal.memberService.memberEntity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import java.sql.Timestamp;
 
 @Getter
 @NoArgsConstructor
