@@ -85,11 +85,24 @@ public class UserController {
         }
     }
 
-    @Secured("ROLE_USER") // 로그인 정보없으면 401 에러 후 로그인페이지로 유턴 시킴
+    @GetMapping(path = "existName2")
+    public String existName2(@RequestParam String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            return "exist";
+        } else {
+            return null;
+        }
+    }
+
+    @Secured({"ROLE_USER","ROLE_ADMIN"}) // 로그인 정보없으면 401 에러 후 로그인페이지로 유턴 시킴
     @GetMapping("/me") // axios 요청 시 헤더에 토큰 담기
     public ResponseEntity<UserResponseDTO> getMyMemberInfo() {
+
         UserResponseDTO myInfoBySecurity = userService.getMyInfoBySecurity();
-        System.out.println(myInfoBySecurity.getName());
+
+        System.out.println("유저이름 : " + myInfoBySecurity.getName());
+
         return ResponseEntity.ok((myInfoBySecurity));
     }
 
@@ -133,9 +146,27 @@ public class UserController {
     // 관리자 페이지 유저리스트
     @Secured("ROLE_ADMIN") // 관리자만 볼 수 있다, 권한없으면 로그아웃 시킴
     @GetMapping(path = "getUserList")
-    public ResponseEntity<List<User>> getAllMember(){
+    public ResponseEntity<List<User>> getAllMember() {
         List<User> list = userRepository.findAll();
         return ResponseEntity.ok(list);
+    }
+
+    // 개인정보 수정 페이지(기존 비밀번호 일치 확인)
+    @PostMapping(path = "exPwdChk")
+    public String exPwdChk(@ModelAttribute User user) {
+        String username = user.getUsername(); // 리액트에서 넘어온 것
+        String password = user.getPassword(); // 리액트에서 넘어온 것
+
+        System.out.println(username + " " + password);
+
+        String exPwds = userRepository.findByPassword(username); // DB 조회
+        System.out.println(exPwds);
+
+        if (passwordEncoder.matches(password, exPwds)) {
+            return "correct";
+        } else {
+            return "false";
+        }
     }
 }
 

@@ -23,8 +23,6 @@ public class AuthController {
 
     private final BCryptPasswordEncoder passwordEncoder;
 
-    private final UserRepository userRepository;
-
     // 회원가입 매핑
     @PostMapping(path = "signup")
     public void signUp(@ModelAttribute User user) {
@@ -32,12 +30,13 @@ public class AuthController {
         String rawPassword = user.getPassword();
         String encPassword = passwordEncoder.encode(rawPassword);
         user.setPassword(encPassword);
-        userRepository.save(user);
+        authService.signup(user);
     }
 
     // 로그인 매핑
     @PostMapping("/login")
     public ResponseEntity<TokenDTO> login(@RequestBody UserRequestDTO requestDTO) {
+        System.out.println(requestDTO.getUsername());
         return ResponseEntity.ok(authService.login(requestDTO));
     }
 
@@ -46,7 +45,6 @@ public class AuthController {
     public ResponseEntity<TokenDTO> reIssue(@RequestBody TokenRequestDTO tokenRequestDTO) {
         return ResponseEntity.ok(authService.reIssue(tokenRequestDTO));
     }
-
 
 }
 

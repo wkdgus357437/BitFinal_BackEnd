@@ -49,6 +49,12 @@ public interface MovieService {
 
 	public void movie_like_minus_one(String movie_title);
 
+	//관리자 페이지 무비 리스트 전체 가져오기 
+	public List<MovieDTO> admin_movie_list();
+	
+	//관리자 페이지 무비 리스트 삭제
+	public void admin_movie_delete(String movie_title);
+
 
 
 
