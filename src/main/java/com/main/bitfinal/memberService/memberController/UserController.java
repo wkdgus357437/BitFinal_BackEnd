@@ -3,6 +3,7 @@ package com.main.bitfinal.memberService.memberController;
 import com.main.bitfinal.memberService.dto.ChangePasswordRequestDTO;
 import com.main.bitfinal.memberService.dto.UserRequestDTO;
 import com.main.bitfinal.memberService.dto.UserResponseDTO;
+import com.main.bitfinal.memberService.memberEntity.RoleType;
 import com.main.bitfinal.memberService.memberEntity.User;
 import com.main.bitfinal.memberService.repository.UserRepository;
 import com.main.bitfinal.memberService.service.UserService;
@@ -46,6 +47,22 @@ public class UserController {
         userService.deleteByUsername(username);
     }
 
+    @GetMapping(path = "roleChange")
+    public String roleChange(@RequestParam String username,@RequestParam String roleType) {
+        User user = userRepository.findByUsername2(username);
+        if(user.getRoleType().equals(roleType)){
+            return "equal";
+        }else{
+            if(roleType.equals("ROLE_ADMIN")){
+                user.setRoleType(RoleType.ROLE_ADMIN);
+            }else{
+                user.setRoleType(RoleType.ROLE_USER);
+            }
+            userRepository.save(user);
+            return"changed";
+        }
+    }
+
     // 아이디 중복체크
     @GetMapping(path = "duplicationChk")
     public String duplicationChk(@RequestParam String username) {
@@ -78,7 +95,7 @@ public class UserController {
         }
     }
 
-    @Secured("ROLE_USER") // 로그인 정보없으면 401 에러 후 로그인페이지로 유턴 시킴
+    @Secured({"ROLE_USER","ROLE_ADMIN"}) // 로그인 정보없으면 401 에러 후 로그인페이지로 유턴 시킴
     @GetMapping("/me") // axios 요청 시 헤더에 토큰 담기
     public ResponseEntity<UserResponseDTO> getMyMemberInfo() {
 
