@@ -78,7 +78,7 @@ public class UserController {
         }
     }
 
-    @Secured("ROLE_USER") // 로그인 정보없으면 401 에러 후 로그인페이지로 유턴 시킴
+    @Secured({"ROLE_USER","ROLE_ADMIN"}) // 로그인 정보없으면 401 에러 후 로그인페이지로 유턴 시킴
     @GetMapping("/me") // axios 요청 시 헤더에 토큰 담기
     public ResponseEntity<UserResponseDTO> getMyMemberInfo() {
 
