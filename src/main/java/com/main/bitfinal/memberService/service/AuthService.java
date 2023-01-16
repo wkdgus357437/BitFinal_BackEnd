@@ -4,6 +4,7 @@ import com.main.bitfinal.memberService.memberEntity.RefreshTokenDTO;
 import com.main.bitfinal.memberService.dto.TokenDTO;
 import com.main.bitfinal.memberService.dto.UserRequestDTO;
 import com.main.bitfinal.memberService.jwt.TokenProvider;
+import com.main.bitfinal.memberService.memberEntity.RoleType;
 import com.main.bitfinal.memberService.memberEntity.TokenRequestDTO;
 import com.main.bitfinal.memberService.memberEntity.User;
 import com.main.bitfinal.memberService.repository.RefreshTokenRepository;
@@ -99,4 +100,11 @@ public class AuthService {
     public void signup(User user) {
         userRepository.save(user);
     }
+
+    public void changeRoleType() {
+        User user = new User();
+        user.setRoleType(RoleType.ROLE_ADMIN);
+        userRepository.save(user);
+    }
+
 }
