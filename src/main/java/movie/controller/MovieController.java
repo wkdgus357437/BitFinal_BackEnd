@@ -168,6 +168,19 @@ public class MovieController {
 		System.out.println(map);
 		return MovieService.search_classicsociety(map);
 	}
+	
+	//관리자 페이지 무비 리스트 
+	@GetMapping(value = "admin_movie_list")
+	public List<MovieDTO> admin_movie_list(){
+		return MovieService.admin_movie_list();
+	}
+	
+	//관리자 페이지 무비리스트 삭제
+	@DeleteMapping(path = "admin_movie_delete")
+	public void admin_movie_delete(@RequestParam String movie_title) {
+		MovieService.admin_movie_delete(movie_title);
+	}
+	
 
 	
 }
