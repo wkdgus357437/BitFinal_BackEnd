@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import movie.bean.MovieDTO;
+import movie.bean.TrailerDTO;
 
 @Repository
 public interface MovieDAO extends JpaRepository<MovieDTO, String>{
@@ -69,8 +70,12 @@ public interface MovieDAO extends JpaRepository<MovieDTO, String>{
 
 	
 	//관리자 페이지 무비 리스트 삭제
-	@Transactional
+	@Transactional 
 	@Modifying
 	@Query(value = "delete from movietable where movie_title =:movie_title", nativeQuery=true)
 	public void deleteByAdmin_movie_delete(@Param("movie_title") String movie_title);
+	
+	
+	@Query("select trailerDTO from TrailerDTO trailerDTO")
+	public List<TrailerDTO> getTrailerList();
 }

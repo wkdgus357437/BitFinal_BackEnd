@@ -38,7 +38,7 @@ public class MovieDTO {
 	@Column(name="movie_header_url")
 	private String movie_header_url;
 
-	@Column(name="movie_already_released", length = 5)
+	@Column(name="movie_already_released", length = 5) 
 	private int movie_already_released;
 
 	@Column(name="movie_release_start", nullable = false, length = 30)
@@ -52,6 +52,9 @@ public class MovieDTO {
 
 	@Column(name="movie_agegrade", length = 100)
 	private String movie_agegrade;
+	
+	@Column(name="movie_score", length = 100)
+	private String movie_score;
 
 	@Column(name = "movie_reserve_rate", length = 1000)
 	@ColumnDefault("0")
@@ -73,9 +76,25 @@ public class MovieDTO {
 	@Column(name = "movie_info_type" ,length = 1000)
 	private String movie_info_type;
 
-	@Column(name = "movie_info_point",length = 1000)
+	@Column(name = "movie_info_point1",length = 1000)
 	@ColumnDefault("0")
-	private String movie_info_point;
+	private String movie_info_point1;
+	
+	@Column(name = "movie_info_point2",length = 1000)
+	@ColumnDefault("0")
+	private String movie_info_point2;
+	
+	@Column(name = "movie_info_point3",length = 1000)
+	@ColumnDefault("0")
+	private String movie_info_point3;
+	
+	@Column(name = "movie_info_point4",length = 1000)
+	@ColumnDefault("0")
+	private String movie_info_point4;
+	
+	@Column(name = "movie_info_point5",length = 1000)
+	@ColumnDefault("0")
+	private String movie_info_point5;
 
 }
 

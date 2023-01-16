@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import movie.bean.CommentDTO;
 import movie.bean.MovieDTO;
+import movie.bean.TrailerDTO;
 
 public interface MovieService {
 	
@@ -53,7 +55,14 @@ public interface MovieService {
 	public List<MovieDTO> admin_movie_list();
 	
 	//관리자 페이지 무비 리스트 삭제
-	public void admin_movie_delete(String movie_title);
+	public void admin_movie_delete(String movie_title); 
+	
+	
+	public List<CommentDTO> getCommentList();
+	
+	public void MovieCommentWrite(CommentDTO commentDTO);
+
+	public List<TrailerDTO> getTrailerList();
 
 
 
