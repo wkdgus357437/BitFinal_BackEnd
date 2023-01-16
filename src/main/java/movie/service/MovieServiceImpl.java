@@ -178,4 +178,17 @@ public class MovieServiceImpl implements MovieService {
 		movieDAO.movie_like_minus_one(movie_title);
 		System.out.println(movie_title);
 	}
+	
+	//관리자 페이지 무비 리스트
+	@Override
+	public List<MovieDTO> admin_movie_list() {
+		return movieDAO.findAll();
+	}
+	
+	//관리자 페이지 무비 삭제
+	@Override
+	public void admin_movie_delete(String movie_title) {
+		movieDAO.deleteByAdmin_movie_delete(movie_title);
+		
+	}
 }
