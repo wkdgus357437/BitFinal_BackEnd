@@ -188,7 +188,7 @@ public class MovieController {
 	public void userCommentWrite(@ModelAttribute CommentDTO commentDTO) {
 		System.out.println("댓글작성 컨트롤러 구역");
 		System.out.println("commentDTO+++++++"+commentDTO);
-		//MovieService.MovieCommentWrite(commentDTO);
+		MovieService.MovieCommentWrite(commentDTO);
 	}
 	@GetMapping(path="get_trailer_list")
 	public List<TrailerDTO> getTrailerList(@RequestParam String title){
