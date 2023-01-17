@@ -6,12 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import movie.bean.CommentDTO;
+import movie.bean.TrailerDTO;
 
 @Repository
-public interface CommentDAO extends JpaRepository<CommentDTO, String>{
+public interface TrailerDAO extends JpaRepository<TrailerDTO, String>{
 	
-	@Query("select c from CommentDTO c where c.movie_title = ?1") 
-	public List<CommentDTO> getCommentList(String title);
+	@Query("select t from TrailerDTO t where t.movie_title = ?1")
+	public List<TrailerDTO> getTrailerList(String title);
 
 }
