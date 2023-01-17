@@ -194,6 +194,7 @@ public class MovieController {
 		System.out.println(commentDTO);
 		MovieService.MovieCommentWrite(commentDTO);
 	}
+	@GetMapping(path="get_trailer_list")
 	public List<TrailerDTO> getTrailerList(){
 		return MovieService.getTrailerList();
 	}

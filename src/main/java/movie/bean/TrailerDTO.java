@@ -12,8 +12,8 @@ import lombok.Data;
 public class TrailerDTO {
 	
 	@Id
-	@Column(name="movie_number", nullable = false)
-	private String movie_number;
+	@Column(name="movie_title", nullable = false)
+	private String movie_title;
 	
 	@Column(name="trailer_url1")
 	private String trailer_url1;

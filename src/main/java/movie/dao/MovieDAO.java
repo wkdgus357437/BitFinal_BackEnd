@@ -16,46 +16,46 @@ import movie.bean.TrailerDTO;
 public interface MovieDAO extends JpaRepository<MovieDTO, String>{
 	
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_class = '1'")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_class = '1' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovieList_boxoffice();
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' AND movieDTO.movie_class = '1'")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' AND movieDTO.movie_class = '1' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovieList_already_on_boxoffice();
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_title like '%' || :keyword || '%' AND movieDTO.movie_class = '1'")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_title like '%' || :keyword || '%' AND movieDTO.movie_class = '1' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovie_title_search_boxoffice(@Param("keyword")String keyword);
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '1'")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '1' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovieList_tobereleased();
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_title like '%' || :keyword || '%' AND movieDTO.movie_already_released = '1'")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_title like '%' || :keyword || '%' AND movieDTO.movie_already_released = '1' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovie_title_search_tobereleased(@Param("keyword")String keyword);
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_class = '3'")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_class = '3' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovieList_special();
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' AND movieDTO.movie_class = '3'")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' AND movieDTO.movie_class = '3' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovieList_already_on_special();
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_title like '%' || :keyword || '%' AND movieDTO.movie_class = '3'")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_title like '%' || :keyword || '%' AND movieDTO.movie_class = '3' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovie_title_search_special(@Param("keyword")String keyword);
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_class = '4'")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_class = '4' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovieList_filmsociety();
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' AND movieDTO.movie_class = '4'")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' AND movieDTO.movie_class = '4' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovieList_already_on_filmsociety();
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_title like '%' || :keyword || '%' AND movieDTO.movie_class = '4'")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_title like '%' || :keyword || '%' AND movieDTO.movie_class = '4' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovie_title_search_filmsociety(@Param("keyword")String keyword);
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_class = '5'")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_class = '5' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovieList_classicsociety();
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' AND movieDTO.movie_class = '5'")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' AND movieDTO.movie_class = '5' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovieList_already_on_classicsociety();
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_title like '%' || :keyword || '%' AND movieDTO.movie_class = '5'")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_title like '%' || :keyword || '%' AND movieDTO.movie_class = '5' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovie_title_search_classicsociety(@Param("keyword")String keyword);
 	
 	@Modifying
