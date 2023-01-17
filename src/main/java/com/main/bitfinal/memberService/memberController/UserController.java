@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -156,11 +155,7 @@ public class UserController {
     public String exPwdChk(@ModelAttribute User user) {
         String username = user.getUsername(); // 리액트에서 넘어온 것
         String password = user.getPassword(); // 리액트에서 넘어온 것
-
-        System.out.println(username + " " + password);
-
         String exPwds = userRepository.findByPassword(username); // DB 조회
-        System.out.println(exPwds);
 
         if (passwordEncoder.matches(password, exPwds)) {
             return "correct";
