@@ -88,7 +88,7 @@ public class AuthService {
         RefreshTokenDTO NewRefreshTokenDTO = refreshTokenDTO.updateValue(tokenDTO.getRefreshToken());
         refreshTokenRepository.save(NewRefreshTokenDTO);
 
-        System.out.println("페이지새로고침-토큰재발급");
+        System.out.println("페이지 새로고침 => 엑세스토큰, 리프레시토큰 재발급 => (리프레시 토큰은 업데이트 쿼리 실행, 다른 사람이 같은 아이디로 로그인 하면 재발급한 리프레시 토큰과 DB에 있는 리프레시토큰이 일치하지 않기 때문에 재발급 불가)");
 
         // 토큰 발급
         return tokenDTO;
