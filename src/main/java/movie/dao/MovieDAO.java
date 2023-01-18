@@ -16,10 +16,10 @@ import movie.bean.TrailerDTO;
 public interface MovieDAO extends JpaRepository<MovieDTO, String>{
 	
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_class = '1' ORDER BY movieDTO.movie_reserve_rate DESC")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' or movieDTO.movie_already_released  = '1' or movieDTO.movie_class = '1' or movieDTO.movie_class = '3' or movieDTO.movie_class = '4' or movieDTO.movie_class = '5' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovieList_boxoffice();
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' AND movieDTO.movie_class = '1' ORDER BY movieDTO.movie_reserve_rate DESC")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovieList_already_on_boxoffice();
 	
 	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_title like '%' || :keyword || '%' AND movieDTO.movie_class = '1' ORDER BY movieDTO.movie_reserve_rate DESC")
@@ -74,9 +74,5 @@ public interface MovieDAO extends JpaRepository<MovieDTO, String>{
 	@Modifying
 	@Query(value = "delete from movietable where movie_title =:movie_title", nativeQuery=true)
 	public void deleteByAdmin_movie_delete(@Param("movie_title") String movie_title);
-
-	@Query("select m.movie_poster_url from MovieDTO m where m.movie_title = ?1")
-	public String getMovieURL(String title);
-
-
+	 
 }
