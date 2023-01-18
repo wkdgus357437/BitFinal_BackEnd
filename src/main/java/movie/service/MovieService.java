@@ -63,8 +63,7 @@ public interface MovieService {
 
 	public List<CommentDTO> getComments(String title);
 
-
-
+	public String getMovieURL(String title);
 
 
 

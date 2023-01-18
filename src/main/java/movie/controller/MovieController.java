@@ -184,6 +184,13 @@ public class MovieController {
 		MovieService.admin_movie_delete(movie_title);
 	}
 	
+	//---- 박지훈
+	@GetMapping(value = "getMovieURL")
+    public String getMovieURL(@RequestParam String title) {
+		return MovieService.getMovieURL(title);
+	}
+    //-----
+	
 	@PostMapping(path="user_comment_write")
 	public void userCommentWrite(@ModelAttribute CommentDTO commentDTO) {
 		System.out.println("댓글작성 컨트롤러 구역");

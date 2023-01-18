@@ -201,7 +201,11 @@ public class MovieServiceImpl implements MovieService {
 		movieDAO.deleteByAdmin_movie_delete(movie_title);
 		
 	}
-	
+
+	@Override
+	public String getMovieURL(String title) {
+		return movieDAO.getMovieURL(title);
+	}	
 	@Override
 	public void MovieCommentWrite(CommentDTO commentDTO) {
 		System.out.println("댓글작성 서비스구역");

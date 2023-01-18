@@ -25,5 +25,5 @@ public interface BookDAO extends JpaRepository<BookDTO, Integer> {
 	@Transactional
 	@Query("update BookDTO bookDTO set movie_seat= ?2 where bookDTO.pk = ?1")
 	void UpdateSeat(int pk,String movie_seat);
-
+    
 }
