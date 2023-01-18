@@ -25,7 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+
+import movie.bean.CommentDTO;
 import movie.bean.MovieDTO;
+import movie.bean.TrailerDTO;
 import movie.service.MovieService;
 
 @CrossOrigin  //(origins = "http://localhost:3000") 하면 지정된 port만 들어올수있다.
@@ -163,7 +166,7 @@ public class MovieController {
 		return MovieService.search_filmsociety(map);
 	}
 	
-	@GetMapping(value="Movie_search_classicsociety")
+	@GetMapping(value="Movie_search_classicsociety") 
 	public List<MovieDTO>search_classicsociety(@RequestParam Map<String, String> map) { //searchOption, keyword
 		System.out.println(map);
 		return MovieService.search_classicsociety(map);
@@ -185,9 +188,25 @@ public class MovieController {
 	@GetMapping(value = "getMovieURL")
     public String getMovieURL(@RequestParam String title) {
 		return MovieService.getMovieURL(title);
-    	
-    }
+	}
+    //-----
 	
+	@PostMapping(path="user_comment_write")
+	public void userCommentWrite(@ModelAttribute CommentDTO commentDTO) {
+		System.out.println("댓글작성 컨트롤러 구역");
+		System.out.println("commentDTO+++++++"+commentDTO);
+		MovieService.MovieCommentWrite(commentDTO);
+	}
+	@GetMapping(path="get_trailer_list")
+	public List<TrailerDTO> getTrailerList(@RequestParam String title){
+		System.out.println("트레일러 리스트 내놔" + MovieService.getTrailerList(title));
+		return MovieService.getTrailerList(title);
+	}
 
+	@GetMapping(path = "getComments")
+	public List<CommentDTO> getComments(@RequestParam String title){
+		System.out.println("list =================================="+MovieService.getComments(title));
+		return MovieService.getComments(title);
+	}
 	
 }

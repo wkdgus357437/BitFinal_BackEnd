@@ -9,13 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import movie.bean.CommentDTO;
 import movie.bean.MovieDTO;
+import movie.bean.TrailerDTO;
+import movie.dao.CommentDAO;
 import movie.dao.MovieDAO;
+import movie.dao.TrailerDAO;
 
 @Service
 public class MovieServiceImpl implements MovieService {
 	@Autowired
-	private MovieDAO movieDAO;
+	private MovieDAO movieDAO; 
+	
+	@Autowired
+	private CommentDAO commentDAO;
+	
+	@Autowired
+	private TrailerDAO trailerDAO;
 	
 	@Override
 	public void write(MovieDTO movieDTO) {
@@ -195,5 +205,21 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public String getMovieURL(String title) {
 		return movieDAO.getMovieURL(title);
+	}	
+	@Override
+	public void MovieCommentWrite(CommentDTO commentDTO) {
+		System.out.println("댓글작성 서비스구역");
+		commentDAO.save(commentDTO);
+	}
+	
+	@Override
+	public List<TrailerDTO> getTrailerList(String title) {
+		System.out.println("예고편 가져오기"); 
+		return trailerDAO.getTrailerList(title);
+	}
+
+	@Override
+	public List<CommentDTO> getComments(String title) {
+		return commentDAO.getCommentList(title);
 	}
 }

@@ -52,4 +52,6 @@ public interface StoreService {
 
 	public PayDTO getPay(String orderNumber);
 
+	public void adminStoreDel(String store_seq);
+
 }

@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.main.bitfinal.memberService.memberEntity.User;
 
@@ -45,5 +47,10 @@ public interface StoreDAO extends JpaRepository<StoreDTO, Long>{
 	
 	@Query("select user from User user where user.username=:username")
 	public User getUser(@Param("username") String username);
+
+	@Transactional
+	@Modifying
+	@Query(value = "delete from storetable where store_seq=:store_seq",nativeQuery = true)
+	public void deleteByAdminStoreDel(@Param("store_seq") String store_seq);
 	
 }

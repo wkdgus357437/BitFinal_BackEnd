@@ -1,13 +1,11 @@
 package com.main.bitfinal.memberService.repository;
 
-import com.main.bitfinal.memberService.dto.UserResponseDTO;
 import com.main.bitfinal.memberService.memberEntity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -23,6 +21,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select user.username from User user where user.name = ?1 and user.birth = ?2 and user.phoneNumber = ?3 ")
     String findByMyId(String name, String birth, String phoneNumber);
+
+    @Query("select user from User user where user.username = ?1")
+    User findByUsername2(String username);
 
     @Query("select user from User user where user.username = ?1 and user.name = ?2 and user.birth = ?3 and user.phoneNumber = ?4")
     Optional<User> findByPasswordUserInfo(String username, String name, String birth, String phoneNumber);

@@ -149,5 +149,11 @@ public class StoreServiceImpl implements StoreService {
 		//DB
 		return payDAO.findByPay(orderNumber);
 	}
+
+	@Override
+	public void adminStoreDel(String store_seq) {
+		storeDAO.deleteByAdminStoreDel(store_seq);
+		
+	}
 	
 }

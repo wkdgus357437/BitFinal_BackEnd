@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -75,24 +76,26 @@ public class StoreController {
 	}
 
 	// name="img" 1개 이상일 경우
-	@PostMapping(value = "/imgUpload")
-	@ResponseBody
-	public void upload(@RequestParam MultipartFile img, HttpSession session) {
-		//실제폴더
-		String filePath = session.getServletContext().getRealPath("/public/storage");
-		System.out.println("실제폴더 : " + filePath);
-		String fileName = img.getOriginalFilename();
+	   @PostMapping(value = "/imgUpload")
+	   @ResponseBody
+	   public void upload(@RequestParam MultipartFile img) {
+	      //실제폴더
+	      // String filePath = session.getServletContext().getRealPath("/public/storage");
+	      // System.out.println("실제폴더 : " + filePath);
+	      //가상폴더 (filePath = 각자의 스토리지 폴더로 지정해야 상품 올라감
+	      String filePath = "/Users/jojanghyeon/java/springBoot/workspace/BitFinal/src/webapp/public/storage";
+	      String fileName = img.getOriginalFilename();
 
-		File file = new File(filePath, fileName);
+	      File file = new File(filePath, fileName);
 
-		try {
-			//FileCopyUtils.copy(upload.getInputStream(), new FileOutputStream(file)); // 가상폴더로 복사한다
-			img.transferTo(file);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}//복사
-	}
+	      try {
+	         //FileCopyUtils.copy(upload.getInputStream(), new FileOutputStream(file)); // 가상폴더로 복사한다
+	         img.transferTo(file);
+	      } catch (IOException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }//복사
+	   }
 
 	//usertable 이용
 	@PostMapping(path = "login")
@@ -185,5 +188,11 @@ public class StoreController {
 	@GetMapping(path = "myStorePaymentInfo")
 	public List<PayDTO> myStorePaymentInfo(@RequestParam String username) {
 		return payDAO.findByMyPayment(username);
+	}
+	
+	// 관리자 store 상품 삭제
+	@DeleteMapping(path = "adminStoreDel")
+	public void adminStoreDel(@RequestParam String store_seq) {
+		storeService.adminStoreDel(store_seq);
 	}
 }
