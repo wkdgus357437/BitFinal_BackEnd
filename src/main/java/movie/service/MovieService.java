@@ -56,16 +56,14 @@ public interface MovieService {
 	
 	//관리자 페이지 무비 리스트 삭제
 	public void admin_movie_delete(String movie_title); 
-	
-	
-	public List<CommentDTO> getCommentList();
-	
+		
 	public void MovieCommentWrite(CommentDTO commentDTO);
 
-	public List<TrailerDTO> getTrailerList();
+	public List<TrailerDTO> getTrailerList(String title);
 
+	public List<CommentDTO> getComments(String title);
 
-
+	public String getMovieURL(String title);
 
 
 

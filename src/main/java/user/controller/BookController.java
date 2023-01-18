@@ -54,10 +54,14 @@ public class BookController {
 		return bookDAO.findById(pk).orElse(null);
 	}
     
+    
+    
     @PostMapping(value = "addSeat")
 	public void addSeat(@RequestBody  Map<String, Object> map) {
 		int pk = (int) map.get("pk");
 		String movie_seat= (String) map.get("movie_seat");
 		bookDAO.UpdateSeat(pk,movie_seat);
 	}
+    
+    
 }

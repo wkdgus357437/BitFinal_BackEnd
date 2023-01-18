@@ -14,6 +14,7 @@ import movie.bean.MovieDTO;
 import movie.bean.TrailerDTO;
 import movie.dao.CommentDAO;
 import movie.dao.MovieDAO;
+import movie.dao.TrailerDAO;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -22,6 +23,9 @@ public class MovieServiceImpl implements MovieService {
 	
 	@Autowired
 	private CommentDAO commentDAO;
+	
+	@Autowired
+	private TrailerDAO trailerDAO;
 	
 	@Override
 	public void write(MovieDTO movieDTO) {
@@ -197,13 +201,11 @@ public class MovieServiceImpl implements MovieService {
 		movieDAO.deleteByAdmin_movie_delete(movie_title);
 		
 	}
-	
+
 	@Override
-	public List<CommentDTO> getCommentList() {
-		System.out.println("댓글리스트 가져오기");
-		return commentDAO.getCommentList();
-	}
-	
+	public String getMovieURL(String title) {
+		return movieDAO.getMovieURL(title);
+	}	
 	@Override
 	public void MovieCommentWrite(CommentDTO commentDTO) {
 		System.out.println("댓글작성 서비스구역");
@@ -211,8 +213,13 @@ public class MovieServiceImpl implements MovieService {
 	}
 	
 	@Override
-	public List<TrailerDTO> getTrailerList() {
+	public List<TrailerDTO> getTrailerList(String title) {
 		System.out.println("예고편 가져오기"); 
-		return movieDAO.getTrailerList();
+		return trailerDAO.getTrailerList(title);
+	}
+
+	@Override
+	public List<CommentDTO> getComments(String title) {
+		return commentDAO.getCommentList(title);
 	}
 }

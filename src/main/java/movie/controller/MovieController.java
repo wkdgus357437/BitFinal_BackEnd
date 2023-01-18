@@ -183,21 +183,30 @@ public class MovieController {
 	public void admin_movie_delete(@RequestParam String movie_title) {
 		MovieService.admin_movie_delete(movie_title);
 	}
-	@GetMapping(path="get_comment_list")
-	public List<CommentDTO> getCommentList() {
-		return MovieService.getCommentList();
-		
+	
+	//---- 박지훈
+	@GetMapping(value = "getMovieURL")
+    public String getMovieURL(@RequestParam String title) {
+		return MovieService.getMovieURL(title);
 	}
+    //-----
+	
 	@PostMapping(path="user_comment_write")
 	public void userCommentWrite(@ModelAttribute CommentDTO commentDTO) {
 		System.out.println("댓글작성 컨트롤러 구역");
-		System.out.println(commentDTO);
+		System.out.println("commentDTO+++++++"+commentDTO);
 		MovieService.MovieCommentWrite(commentDTO);
 	}
 	@GetMapping(path="get_trailer_list")
-	public List<TrailerDTO> getTrailerList(){
-		return MovieService.getTrailerList();
+	public List<TrailerDTO> getTrailerList(@RequestParam String title){
+		System.out.println("트레일러 리스트 내놔" + MovieService.getTrailerList(title));
+		return MovieService.getTrailerList(title);
 	}
 
+	@GetMapping(path = "getComments")
+	public List<CommentDTO> getComments(@RequestParam String title){
+		System.out.println("list =================================="+MovieService.getComments(title));
+		return MovieService.getComments(title);
+	}
 	
 }
