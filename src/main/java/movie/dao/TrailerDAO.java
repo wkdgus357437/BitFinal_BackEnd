@@ -12,6 +12,6 @@ import movie.bean.TrailerDTO;
 public interface TrailerDAO extends JpaRepository<TrailerDTO, String>{
 	
 	@Query("select t from TrailerDTO t where t.movie_title = ?1")
-	public List<TrailerDTO> getTrailerList(String title);
+	public TrailerDTO getTrailer(String title);
 
 }

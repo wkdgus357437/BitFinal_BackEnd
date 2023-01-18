@@ -206,6 +206,7 @@ public class MovieServiceImpl implements MovieService {
 	public String getMovieURL(String title) {
 		return movieDAO.getMovieURL(title);
 	}	
+	
 	@Override
 	public void MovieCommentWrite(CommentDTO commentDTO) {
 		System.out.println("댓글작성 서비스구역");
@@ -213,9 +214,16 @@ public class MovieServiceImpl implements MovieService {
 	}
 	
 	@Override
-	public List<TrailerDTO> getTrailerList(String title) {
+	public void MovieCommentDelete(String id) {
+		System.out.println("무비컨트롤러 딜리트 서비스" + id);
+		commentDAO.deleteById(id);
+		
+	}
+	
+	@Override
+	public TrailerDTO getTrailer(String title) {
 		System.out.println("예고편 가져오기"); 
-		return trailerDAO.getTrailerList(title);
+		return trailerDAO.getTrailer(title);
 	}
 
 	@Override

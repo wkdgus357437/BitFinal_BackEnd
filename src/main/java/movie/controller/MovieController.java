@@ -197,10 +197,16 @@ public class MovieController {
 		System.out.println("commentDTO+++++++"+commentDTO);
 		MovieService.MovieCommentWrite(commentDTO);
 	}
-	@GetMapping(path="get_trailer_list")
-	public List<TrailerDTO> getTrailerList(@RequestParam String title){
-		System.out.println("트레일러 리스트 내놔" + MovieService.getTrailerList(title));
-		return MovieService.getTrailerList(title);
+	@DeleteMapping(path="user_comment_delete")
+	public void userCommetDelete(@RequestParam String id) {
+		System.out.println("무비컨트롤러 딜리트" + id);
+		MovieService.MovieCommentDelete(id);
+		
+	}
+	@GetMapping(path="get_trailer")
+	public TrailerDTO getTrailer(@RequestParam String title){
+		System.out.println("트레일러 리스트 내놔" + MovieService.getTrailer(title));
+		return MovieService.getTrailer(title);
 	}
 
 	@GetMapping(path = "getComments")

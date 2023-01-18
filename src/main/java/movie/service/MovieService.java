@@ -59,11 +59,13 @@ public interface MovieService {
 		
 	public void MovieCommentWrite(CommentDTO commentDTO);
 
-	public List<TrailerDTO> getTrailerList(String title);
+	public TrailerDTO getTrailer(String title);
 
 	public List<CommentDTO> getComments(String title);
 
 	public String getMovieURL(String title);
+	
+	public void MovieCommentDelete(String id);
 
 
 
