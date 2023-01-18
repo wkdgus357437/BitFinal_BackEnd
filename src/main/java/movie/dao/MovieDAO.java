@@ -22,7 +22,7 @@ public interface MovieDAO extends JpaRepository<MovieDTO, String>{
 	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovieList_already_on_boxoffice();
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_title like '%' || :keyword || '%' AND movieDTO.movie_class = '1' ORDER BY movieDTO.movie_reserve_rate DESC")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_title like '%' || :keyword || '%' AND movieDTO.movie_already_released = '0' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovie_title_search_boxoffice(@Param("keyword")String keyword);
 	
 	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '1' ORDER BY movieDTO.movie_reserve_rate DESC")
