@@ -181,6 +181,13 @@ public class MovieController {
 		MovieService.admin_movie_delete(movie_title);
 	}
 	
+	//---- 박지훈
+	@GetMapping(value = "getMovieURL")
+    public String getMovieURL(@RequestParam String title) {
+		return MovieService.getMovieURL(title);
+    	
+    }
+	
 
 	
 }

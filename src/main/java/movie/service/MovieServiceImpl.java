@@ -191,4 +191,9 @@ public class MovieServiceImpl implements MovieService {
 		movieDAO.deleteByAdmin_movie_delete(movie_title);
 		
 	}
+
+	@Override
+	public String getMovieURL(String title) {
+		return movieDAO.getMovieURL(title);
+	}
 }

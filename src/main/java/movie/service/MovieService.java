@@ -55,8 +55,7 @@ public interface MovieService {
 	//관리자 페이지 무비 리스트 삭제
 	public void admin_movie_delete(String movie_title);
 
-
-
+	public String getMovieURL(String title);
 
 
 
