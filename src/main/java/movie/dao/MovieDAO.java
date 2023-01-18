@@ -78,4 +78,5 @@ public interface MovieDAO extends JpaRepository<MovieDTO, String>{
 	@Query("select m.movie_poster_url from MovieDTO m where m.movie_title = ?1")
 	public String getMovieURL(String title);
 
+
 }
