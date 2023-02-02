@@ -10,7 +10,6 @@ import javax.persistence.*;
 @SequenceGenerator(
         name = "movieBook_SEQ_GENERATOR"
         , sequenceName = "movieBook_SEQ"
-        , initialValue = 1
         , allocationSize = 1
 )
 @Table(name = "movie_book")

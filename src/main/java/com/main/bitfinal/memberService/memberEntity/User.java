@@ -27,7 +27,7 @@ public class User {
             generator = "MEMBER_SEQ_GENERATOR")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username; // id
     @Column(nullable = false)
     private String password; // 마이페이지에서 변경가능하게 setter 잡기
@@ -50,6 +50,34 @@ public class User {
         this.name = name;
     }
 
+    public void setRoleType(RoleType roleType) {
+        this.roleType = roleType;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setBirth(String birth) {
+        this.birth = birth;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
+    }
+
     @Builder
     public User(Long id, String password, String name, String email,
                 String birth, String phoneNumber, Timestamp createDate, RoleType roleType) {
@@ -63,18 +91,4 @@ public class User {
         this.roleType = roleType;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", birth='" + birth + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", createDate=" + createDate +
-                ", roleType=" + roleType +
-                '}';
-    }
 }

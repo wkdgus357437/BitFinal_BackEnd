@@ -46,7 +46,7 @@ public class SecurityConfig {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("http://localhost:3000/adminindex/**").hasRole("ADMIN")
+                .antMatchers("/adminindex/**").hasRole("ADMIN")
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

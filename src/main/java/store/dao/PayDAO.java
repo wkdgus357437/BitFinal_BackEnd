@@ -7,11 +7,14 @@ import org.springframework.stereotype.Repository;
 
 import store.bean.PayDTO;
 
+import java.util.List;
+
 @Repository
 public interface PayDAO extends JpaRepository<PayDTO, String> {
 	
-	@Query("select payDTO from PayDTO payDTO where payDTO.orderNumber=:orderNumber")
-	public PayDTO findByPay(@Param("orderNumber") String orderNumber);
-	
-	
+	@Query("select payDTO from PayDTO payDTO where payDTO.orderNumber=:ordernumber")
+	public PayDTO findByPay(@Param("ordernumber") String orderNumber);
+
+	@Query("select p from PayDTO p where p.userName = ?1 order by p.orderNumber desc ")
+	List<PayDTO> findByMyPayment(String username);
 }
