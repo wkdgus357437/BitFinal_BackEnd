@@ -8,7 +8,7 @@ import user.dao.BookDAO;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin
 @RestController
 @RequestMapping(value="book")
 public class BookController {
